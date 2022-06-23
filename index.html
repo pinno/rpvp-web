@@ -169,34 +169,34 @@ var toggleableLayerIds2 = ['edifici-23b2fc', 'andreapinna-sardinia-coverage'];
 
 var layerShortIds2 = ['Buildings','Coverage']
 
-for (var i = 0; i < toggleableLayerIds2.length; i++) {
-  var id = toggleableLayerIds2[i];
+for (var i2 = 0; i2 < toggleableLayerIds2.length; i2++) {
+  var id2 = toggleableLayerIds2[i2];
  
-  var link = document.createElement('a');
-  link.href = '#';
-  link.className = '';
-  link.textContent = layerShortIds2[i];
-  link.layer = id;
+  var link2 = document.createElement('a');
+  link2.href = '#';
+  link2.className = '';
+  link2.textContent = layerShortIds2[i2];
+  link2.layer = id2;
  
-  link.onclick = function(e) {
-    var clickedLayer = this.layer;
-    e.preventDefault();
-    e.stopPropagation();
+  link2.onclick = function(e2) {
+    var clickedLayer2 = this.layer;
+    e2.preventDefault();
+    e2.stopPropagation();
  
-    var visibility = map.getLayoutProperty(clickedLayer, 'visibility');
+    var visibility2 = map.getLayoutProperty(clickedLayer2, 'visibility');
  
-    if (visibility === 'visible') {
-      map.setLayoutProperty(clickedLayer, 'visibility', 'none');
+    if (visibility2 === 'visible') {
+      map.setLayoutProperty(clickedLayer2, 'visibility', 'none');
       this.className = '';
     }
     else {
       this.className = 'active';
-      map.setLayoutProperty(clickedLayer, 'visibility', 'visible');
+      map.setLayoutProperty(clickedLayer2, 'visibility', 'visible');
     }
   };
  
-  var layers = document.getElementById('menu2');
-  layers.appendChild(link);
+  var layers2 = document.getElementById('menu2');
+  layers2.appendChild(link2);
 }
 
 </script>

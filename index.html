@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<title>Rooftop PV Potential in Sardinia</title>
+
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.8.2/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.8.2/mapbox-gl.js"></script>
+
+<style>
+body { margin: 0; padding: 0; }
+#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+</style>
+
+</head>
+
+<body>
+
+<style>
+
+#menu {
+background: #fff;
+position: absolute;
+z-index: 1;
+top: 10px;
+right: 10px;
+border-radius: 3px;
+width: 120px;
+border: 1px solid rgba(0, 0, 0, 0.4);
+font-family: 'Open Sans', sans-serif;
+}
+ 
+#menu a {
+font-size: 13px;
+color: #404040;
+display: block;
+margin: 0;
+padding: 0;
+padding: 10px;
+text-decoration: none;
+border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+text-align: center;
+}
+ 
+#menu a:last-child {
+border: none;
+}
+ 
+#menu a:hover {
+background-color: #f8f8f8;
+color: #404040;
+}
+ 
+#menu a.active {
+background-color: #3887be;
+color: #ffffff;
+}
+ 
+#menu a.active:hover {
+background: #3074a4;
+}
+
+
+#menu2 {
+background: #fff;
+position: absolute;
+z-index: 1;
+top: 200px;
+right: 10px;
+border-radius: 3px;
+width: 120px;
+border: 1px solid rgba(0, 0, 0, 0.4);
+font-family: 'Open Sans', sans-serif;
+}
+ 
+#menu2 a {
+font-size: 13px;
+color: #404040;
+display: block;
+margin: 0;
+padding: 0;
+padding: 10px;
+text-decoration: none;
+border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+text-align: center;
+}
+ 
+#menu2 a:last-child {
+border: none;
+}
+ 
+#menu2 a:hover {
+background-color: #f8f8f8;
+color: #404040;
+}
+ 
+#menu2 a.active {
+background-color: #3887be;
+color: #ffffff;
+}
+ 
+#menu2 a.active:hover {
+background: #3074a4;
+}
+
+</style>
+
+<div id='map'></div>
+<nav id="menu"></nav>
+<nav id="menu2"></nav>
+
+<script>
+
+// Initialize Mapbox map
+
+mapboxgl.accessToken = 'pk.eyJ1IjoiYW5kcmVhcGlubmEiLCJhIjoiY2w0cXF2bzlnMHJlOTNmbG5rcW55dmZwayJ9.TTwj-uKqAMMEKco2eKzu0Q';
+const map = new mapboxgl.Map({
+container: 'map', // container ID
+style: 'mapbox://styles/andreapinna/cl4px3h4s000y14n2q3sjta7p', // style URL
+center: [9.168, 40.087],
+zoom: 7 // starting zoom
+});
+
+// Irradiation and power rasters
+
+var toggleableLayerIds = ['andreapinna-sardinia-ghi', 'andreapinna-sardinia-dni', 'andreapinna-sardinia-dni-poa', 'andreapinna-sardinia-dhi-poa', 'andreapinna-sardinia-poa'];
+
+var layerShortIds = ['GHI', 'DNI', 'DNI-POA', 'DHI-POA', 'POA']
+ 
+for (var i = 0; i < toggleableLayerIds.length; i++) {
+  var id = toggleableLayerIds[i];
+ 
+  var link = document.createElement('a');
+  link.href = '#';
+  link.className = '';
+  link.textContent = layerShortIds[i];
+  link.layer = id;
+ 
+link.onclick = function(e) {
+  var clickedLayer = this.layer;
+  e.preventDefault();
+  e.stopPropagation(); 
+  for (var j = 0; j < toggleableLayerIds.length; j++) {
+    if (clickedLayer === toggleableLayerIds[j]) {
+      if (layers.children[j].className == '') {
+        layers.children[j].className = 'active';
+        map.setLayoutProperty(toggleableLayerIds[j], 'visibility', 'visible');}
+      else {
+        layers.children[j].className = '';
+        map.setLayoutProperty(toggleableLayerIds[j], 'visibility', 'none');}
+    }
+    else {
+      layers.children[j].className = '';
+      map.setLayoutProperty(toggleableLayerIds[j], 'visibility', 'none');
+    }
+  }
+};
+ 
+  var layers = document.getElementById('menu');
+  layers.appendChild(link);
+}
+
+// Buildings and coverage rasters
+
+var toggleableLayerIds2 = ['edifici-23b2fc', 'andreapinna-sardinia-coverage'];
+
+var layerShortIds2 = ['Buildings','Coverage']
+
+for (var i = 0; i < toggleableLayerIds2.length; i++) {
+  var id = toggleableLayerIds2[i];
+ 
+  var link = document.createElement('a');
+  link.href = '#';
+  link.className = '';
+  link.textContent = layerShortIds2[i];
+  link.layer = id;
+ 
+  link.onclick = function(e) {
+    var clickedLayer = this.layer;
+    e.preventDefault();
+    e.stopPropagation();
+ 
+    var visibility = map.getLayoutProperty(clickedLayer, 'visibility');
+ 
+    if (visibility === 'visible') {
+      map.setLayoutProperty(clickedLayer, 'visibility', 'none');
+      this.className = '';
+    }
+    else {
+      this.className = 'active';
+      map.setLayoutProperty(clickedLayer, 'visibility', 'visible');
+    }
+  };
+ 
+  var layers = document.getElementById('menu2');
+  layers.appendChild(link);
+}
+
+</script>
+
+</body>
+</html>

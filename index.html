@@ -126,9 +126,9 @@ zoom: 7 // starting zoom
 
 // Irradiation and power rasters
 
-var toggleableLayerIds = ['andreapinna-sardinia-ghi', 'andreapinna-sardinia-dni', 'andreapinna-sardinia-dni-poa', 'andreapinna-sardinia-dhi-poa', 'andreapinna-sardinia-poa'];
+var toggleableLayerIds = ['andreapinna-sardinia-ghi', 'andreapinna-sardinia-dni', 'andreapinna-sardinia-dni-poa', 'andreapinna-sardinia-dhi-poa', 'andreapinna-sardinia-poa', 'andreapinna-sardinia-aspect', 'andreapinna-sardinia-slope', 'andreapinna-sardinia-power', 'andreapinna-sardinia-lcoe'];
 
-var layerShortIds = ['GHI', 'DNI', 'DNI-POA', 'DHI-POA', 'POA']
+var layerShortIds = ['GHI', 'DNI', 'DNI-POA', 'DHI-POA', 'POA', 'ASPECT', 'SLOPE', 'POWER', 'LCOE']
  
 for (var i = 0; i < toggleableLayerIds.length; i++) {
   var id = toggleableLayerIds[i];
@@ -165,9 +165,9 @@ link.onclick = function(e) {
 
 // Buildings and coverage rasters
 
-var toggleableLayerIds2 = ['edifici-23b2fc', 'andreapinna-sardinia-coverage'];
+var toggleableLayerIds2 = ['edifici-23b2fc', 'comuni-2mi8hc', 'andreapinna-sardinia-coverage'];
 
-var layerShortIds2 = ['Buildings','Coverage']
+var layerShortIds2 = ['Buildings', 'Municipalities', 'DSM Coverage']
 
 for (var i2 = 0; i2 < toggleableLayerIds2.length; i2++) {
   var id2 = toggleableLayerIds2[i2];
